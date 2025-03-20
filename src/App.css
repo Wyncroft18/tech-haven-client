@@ -1,0 +1,149 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #03191f;
+    font-family: sans-serif;
+    color: #e5f3f8;
+}
+
+div#root {
+    min-height: 100vh;
+    min-width: 320px;
+}
+
+:focus {
+    outline: 2px solid #e5f3f8;
+}
+
+/* navbar */
+
+nav {
+    height: 4rem;
+    border-bottom: solid 1px #083846;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 clamp(1rem, 4.44vw - 0.33rem, 3rem);
+    font-size: clamp(1rem, 0.28vw + 0.92rem, 1.125rem);
+}
+
+a {
+    text-decoration: none;
+    color: #34c9ff;
+    transition: opacity 0.15s;
+}
+
+a:hover {
+    opacity: 0.7;
+}
+
+a.nav-link {
+    text-decoration: none;
+    color: inherit;
+    opacity: 1;
+}
+
+ul {
+    display: flex;
+    flex-direction: row;
+    gap: clamp(1rem, 4.44vw - 0.33rem, 3rem);
+    list-style: none;
+}
+
+/* product page */
+
+.product-container {
+    width: 80vw;
+    margin: 3rem auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+article {
+    border-radius: 8px;
+    padding: 1rem;
+    background-color: #04252e;
+}
+
+/* register/login page */
+
+.form-container {
+    height: 89vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: clamp(1rem, 0.28vw + 0.92rem, 1.125rem);
+}
+
+.form {
+    border: 2px solid #083846;
+    width: clamp(22.375rem, 43.89vw + 10.83rem, 43.75rem);
+    height: 60vh;
+    text-align: center;
+    padding: 1.5rem clamp(1rem, 4.44vw - 0.33rem, 3rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 0 20px #e5f3f857;
+}
+
+.input-section {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 8px;
+}
+
+.input-field {
+    width: 100%;
+    height: 2.25rem;
+    border: none;
+    background-color: #062933;
+    color: white;
+    padding: 0 0.8rem;
+    font-size: 1rem;
+    letter-spacing: 1.5px;
+    border-radius: 4px;
+}
+
+.input-field:focus {
+    outline: 2px solid #88cae1;
+}
+
+::placeholder {
+    color: #e5f3f89c;
+}
+
+.form-btn {
+    background-color: #87224fdc;
+    border: none;
+    height: 2.5rem;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: inherit;
+    transition: opacity 0.15s;
+}
+
+.form-btn:hover {
+    opacity: 0.8;
+}
+
+.form-btn:active {
+    opacity: 0.6;
+}
+
+/* media queries */
+
+@media (min-width: 768px) {
+    .form-btn {
+        width: 150px;
+        align-self: center;
+    }
+}
