@@ -6,7 +6,7 @@ export default function Products() {
     const apiKey = import.meta.env.VITE_API_BASE_URL;
 
     useEffect(() => {
-        fetch(`${apiKey}/products/`)
+        fetch(`${apiKey}/products`)
             .then((res) => res.json())
             .then((data) => setProductData(data.products));
     }, []);
