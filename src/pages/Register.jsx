@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import Swal from "sweetalert2"
+import Swal from "sweetalert2";
 
 export default function Register() {
     const [email, setEmail] = useState("");
@@ -25,22 +25,25 @@ export default function Register() {
         })
             .then((res) => res.json())
             .then((data) => {
-
                 if (data.message === "User registered successfully.") {
                     Swal.fire({
                         title: "Registration Successful!",
-                        icon: "success"
-                    })
+                        icon: "success",
+                    });
                 } else {
                     Swal.fire({
                         title: "Email already used",
-                        icon: "error"
-                    })
+                        icon: "error",
+                    });
                 }
             })
             .catch((error) => {
                 console.error("Error:", error);
             });
+
+        setEmail("");
+        setPassword("");
+        setConfirmPassword("");
     }
 
     useEffect(() => {
@@ -69,6 +72,7 @@ export default function Register() {
                         type="email"
                         placeholder="Smith11@mail.com"
                         onChange={(e) => setEmail(e.target.value)}
+                        value={email}
                     />
                 </section>
 
@@ -80,6 +84,7 @@ export default function Register() {
                         type="password"
                         placeholder="Starfish88"
                         onChange={(e) => setPassword(e.target.value)}
+                        value={password}
                     />
                 </section>
 
@@ -91,6 +96,7 @@ export default function Register() {
                         type="password"
                         placeholder="Starfish88"
                         onChange={(e) => setConfirmPassword(e.target.value)}
+                        value={confirmPassword}
                     />
                 </section>
 
