@@ -22,7 +22,7 @@ export default function Navbar() {
                         <Link className="nav-link" to="/">
                             Orders
                         </Link>
-                        <Link className="nav-link" to="/">
+                        <Link className="nav-link" to="/logout">
                             Logout
                         </Link>
                     </>

@@ -5,6 +5,7 @@ import Products from "./pages/Products";
 import Layout from "./components/Layout";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Logout from "./pages/Logout"
 
 const userContext = createContext()
 
@@ -28,6 +29,7 @@ export default function App() {
                             <Route path="/" element={<Products />} />
                             <Route path="/login" element={<Login />} />
                             <Route path="/register" element={<Register />} />
+                            <Route path="/logout" element={<Logout />} />
                         </Route>
                     </Routes>
                 </BrowserRouter>
