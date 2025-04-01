@@ -110,7 +110,7 @@ export default function Login() {
                     />
                 </section>
 
-                <button className="form-btn" disabled={!isActive}>
+                <button className={isActive ? "form-btn" : "form-btn disabled"} disabled={!isActive}>
                     Login
                 </button>
 

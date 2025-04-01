@@ -100,7 +100,7 @@ export default function Register() {
                     />
                 </section>
 
-                <button className="form-btn" disabled={!isActive}>
+                <button className={isActive ? "form-btn" : "form-btn disabled"} disabled={!isActive}>
                     Submit
                 </button>
 

@@ -157,6 +157,7 @@ ul {
     font-weight: bold;
     color: inherit;
     transition: opacity 0.15s;
+    position: relative;
 }
 
 .form-btn:hover {
@@ -165,6 +166,11 @@ ul {
 
 .form-btn:active {
     opacity: 0.6;
+}
+
+.form-btn.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
 /* single product page */
@@ -221,6 +227,11 @@ ul {
 
 .single-product button:active {
     opacity: 0.6;
+}
+
+.single-product button.disabled{
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
 /* media queries */

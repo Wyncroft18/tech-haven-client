@@ -1,7 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
+import { userContext } from "../App";
 
 export default function SingleProduct() {
+    const {user, setUser} = useContext(userContext)
+
     const [product, setProduct] = useState([])
 
     const params = useParams();
@@ -28,7 +31,7 @@ export default function SingleProduct() {
                     <h4>Description:</h4>
                     <p className="description">{product.description}</p>
                     <h3>{php.format(product.price)}</h3>
-                    <button className="buy-btn">Buy now</button>
+                    <button className={user.id === null ? "disabled" : ""}>Buy now</button>
                 </div>
             </article>
         </div>
