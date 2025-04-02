@@ -210,6 +210,15 @@ ul {
     text-align: justify;
 }
 
+.single-product section {
+    font-weight: bold;
+}
+
+.single-product section input {
+    width: 3rem;
+    padding: 0 4px;
+}
+
 .single-product button {
     background-color: #99275adc;
     border: none;

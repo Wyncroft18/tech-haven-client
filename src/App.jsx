@@ -12,6 +12,8 @@ const userContext = createContext()
 
 export default function App() {
 
+    const apiKey = import.meta.env.VITE_API_BASE_URL;
+
     const [user, setUser] = useState({
         id: null,
         isAdmin: null
@@ -20,6 +22,28 @@ export default function App() {
     const unsetUser = () => {
         localStorage.clear()
     }
+
+    useEffect(() => {
+        fetch(`${apiKey}/users/details`, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`
+            }
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (typeof data.user !== "undefined") {
+                setUser({
+                    id: data.user._id,
+                    isAdmin: data.user.isAdmin
+                })
+            } else {
+                setUser({
+                    id: null,
+                    isAdmin: null
+                })
+            }
+        })
+    }, [])
 
     return (
         <>
