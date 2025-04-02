@@ -79,6 +79,7 @@ export default function SingleProduct() {
                     <button
                         onClick={(e) => clickHandler(e)}
                         className={user.id === null ? "disabled" : ""}
+                        disabled={user.id === null}
                     >
                         Buy now
                     </button>
