@@ -33,10 +33,16 @@ export default function Cart() {
     }, []);
 
     return (
+        cartItemsElement.length > 0 
+        ?
         <div className="cart-container">
             <h1>Your cart</h1>
             <section>{cartItemsElement}</section>
             <h3>Total Price: {phPeso.format(cart.totalPrice)}</h3>
+        </div>
+        :
+        <div className="cart-container">
+            <h1>You cart is empty</h1>
         </div>
     );
 }
