@@ -7,7 +7,7 @@ export default function Navbar() {
 
     return (
         <nav>
-            <Link className="nav-link" to="/">
+            <Link className="logo" to="/">
                 <h1>Tech Haven</h1>
             </Link>
             <ul>
