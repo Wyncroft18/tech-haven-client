@@ -13,7 +13,7 @@ export default function Products() {
     }, []);
 
     const itemsElement = productData.map((item) => {
-        let phPeso = new Intl.NumberFormat("en-US", {
+        const phPeso = new Intl.NumberFormat("en-US", {
             style: "currency",
             currency: "PHP",
         });

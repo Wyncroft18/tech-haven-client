@@ -7,6 +7,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Logout from "./pages/Logout"
 import SingleProduct from "./pages/SingleProduct";
+import Cart from "./pages/Cart"
 
 const userContext = createContext()
 
@@ -56,6 +57,7 @@ export default function App() {
                             <Route path="/register" element={<Register />} />
                             <Route path="/logout" element={<Logout />} />
                             <Route path="/:productId" element={<SingleProduct />} />
+                            <Route path="/cart" element={<Cart />} />
                         </Route>
                     </Routes>
                 </BrowserRouter>

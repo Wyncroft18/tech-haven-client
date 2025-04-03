@@ -16,7 +16,7 @@ export default function Navbar() {
                 </Link>
                 {user.id !== null ? (
                     <>
-                        <Link className="nav-link" to="/">
+                        <Link className="nav-link" to="/cart">
                             Cart
                         </Link>
                         <Link className="nav-link" to="/">

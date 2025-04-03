@@ -81,7 +81,7 @@ export default function SingleProduct() {
                         className={user.id === null ? "disabled" : ""}
                         disabled={user.id === null}
                     >
-                        Buy now
+                        Add to cart
                     </button>
                 </div>
             </article>
