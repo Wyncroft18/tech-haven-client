@@ -18,8 +18,7 @@ export default function SingleProduct() {
         currency: "PHP",
     });
 
-    async function clickHandler(e) {
-        e.preventDefault();
+    async function clickHandler() {
 
         const result = await fetch(`${apiKey}/carts/add-to-cart`, {
             method: "POST",
@@ -37,13 +36,13 @@ export default function SingleProduct() {
 
         if (data) {
             Swal.fire({
-                title: "Successfully added!",
+                title: "Success!",
                 text: "You have successfully added the item to cart.",
                 icon: "success",
             });
         } else {
             Swal.fire({
-                title: "Something went wrong.",
+                title: "Error!",
                 text: "Please try again.",
                 icon: "error",
             });
@@ -77,7 +76,7 @@ export default function SingleProduct() {
                     </section>
                     <h3>{php.format(product.price)}</h3>
                     <button
-                        onClick={(e) => clickHandler(e)}
+                        onClick={() => clickHandler()}
                         className={user.id === null ? "disabled" : ""}
                         disabled={user.id === null}
                     >

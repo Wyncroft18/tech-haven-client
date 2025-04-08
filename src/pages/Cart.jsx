@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Swal from "sweetalert2";
 
 export default function Cart() {
     const [cart, setCart] = useState([]);
@@ -20,6 +21,34 @@ export default function Cart() {
         );
     });
 
+    async function checkout() {
+
+        const result = await fetch(`${apiKey}/orders/add-to-checkout`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("token")}`
+            }
+        })
+
+        const data = await result.json()
+
+        if (data) {
+            Swal.fire({
+                title: "Success!",
+                text: "You have successfully placed your order.",
+                icon: "success"
+            })
+        } else {
+            Swal.fire({
+                title: "Error!",
+                text: "Something went wrong placing your order.",
+                icon: "error"
+            })
+        }
+
+    }
+
     useEffect(() => {
         fetch(`${apiKey}/carts`, {
             headers: {
@@ -30,15 +59,18 @@ export default function Cart() {
             .then((data) => {
                 setCart(data);
             });
-    }, []);
+    }, [cart]);
 
     return (
         cartItemsElement.length > 0 
         ?
         <div className="cart-container">
             <h1>Your cart</h1>
-            <section>{cartItemsElement}</section>
-            <h3>Total Price: {phPeso.format(cart.totalPrice)}</h3>
+            <section id="cart-items">{cartItemsElement}</section>
+            <section id="checkout">
+                <h3>Total Price: {phPeso.format(cart.totalPrice)}</h3>
+                <button onClick={() => checkout()}>Checkout</button>
+            </section>
         </div>
         :
         <div className="cart-container">
