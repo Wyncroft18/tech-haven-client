@@ -19,7 +19,7 @@ export default function Navbar() {
                         <Link className="nav-link" to="/cart">
                             Cart
                         </Link>
-                        <Link className="nav-link" to="/">
+                        <Link className="nav-link" to="/orders">
                             Orders
                         </Link>
                         <Link className="nav-link" to="/logout">
