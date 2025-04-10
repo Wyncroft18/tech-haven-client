@@ -100,6 +100,26 @@ ul {
     gap: 1rem;
 }
 
+/* modal */
+.Modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #094152;
+    box-shadow: 0 0 30px white;
+    padding: 1rem;
+}
+
+.Overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
 .home-container button {
     background-color: rgb(21, 156, 21);
     border: none;
