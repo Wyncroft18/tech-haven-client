@@ -59,6 +59,15 @@ a.logo {
     position: relative;
 }
 
+a.logo {
+    color: #34c9ff;
+    transition: text-shadow 0.15s;
+}
+
+a.logo:hover {
+    text-shadow: 1px 1px 32px var(--text);
+}
+
 a.nav-link::after {
     content: "";
     position: absolute;
