@@ -23,8 +23,10 @@ export default function Home() {
                 </div>
             </div>
         :
-            <div className="product-container">
-                <Products productData={productData} />
+            <div className="home-container">
+                <div className="product-container">
+                    <Products productData={productData} />
+                </div>
             </div>
     )
 }
