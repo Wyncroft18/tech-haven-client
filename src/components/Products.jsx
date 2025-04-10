@@ -1,16 +1,6 @@
-import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-export default function Products() {
-    const [productData, setProductData] = useState([]);
-
-    const apiKey = import.meta.env.VITE_API_BASE_URL;
-
-    useEffect(() => {
-        fetch(`${apiKey}/products`)
-            .then((res) => res.json())
-            .then((data) => setProductData(data.products));
-    }, []);
+export default function Products({productData}) {
 
     const itemsElement = productData.map((item) => {
         const phPeso = new Intl.NumberFormat("en-US", {
@@ -33,5 +23,5 @@ export default function Products() {
         );
     });
 
-    return <div className="product-container">{itemsElement}</div>;
+    return itemsElement
 }

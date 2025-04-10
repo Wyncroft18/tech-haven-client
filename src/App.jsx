@@ -1,7 +1,7 @@
 import "./App.css";
 import { createContext, useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Products from "./pages/Products";
+import Home from "./pages/Home";
 import Layout from "./components/Layout";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -35,7 +35,7 @@ export default function App() {
         .then(data => {
             if (typeof data.user !== "undefined") {
                 setUser({
-                    id: data.user._id,
+                    id: data.user.id,
                     isAdmin: data.user.isAdmin
                 })
             } else {
@@ -52,14 +52,14 @@ export default function App() {
             <userContext.Provider value={{user, setUser, unsetUser}}>
                 <BrowserRouter>
                     <Routes>
-                        <Route element={<Layout />}>
-                            <Route path="/" element={<Products />} />
-                            <Route path="/login" element={<Login />} />
-                            <Route path="/register" element={<Register />} />
-                            <Route path="/logout" element={<Logout />} />
-                            <Route path="/:productId" element={<SingleProduct />} />
-                            <Route path="/cart" element={<Cart />} />
-                            <Route path="/orders" element={<Order />} />
+                        <Route path="/" element={<Layout />}>
+                            <Route index element={<Home />} />
+                            <Route path="login" element={<Login />} />
+                            <Route path="register" element={<Register />} />
+                            <Route path="logout" element={<Logout />} />
+                            <Route path=":productId" element={<SingleProduct />} />
+                            <Route path="cart" element={<Cart />} />
+                            <Route path="orders" element={<Order />} />
                         </Route>
                     </Routes>
                 </BrowserRouter>
