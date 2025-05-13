@@ -1,11 +1,8 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { userContext } from "../App";
-import Swal from "sweetalert2";
+import AddToCart from "../components/AddToCart";
 
 export default function SingleProduct() {
-    const { user, setUser } = useContext(userContext);
-
     const [product, setProduct] = useState([]);
     const [quantity, setQuantity] = useState(1);
 
@@ -17,37 +14,6 @@ export default function SingleProduct() {
         style: "currency",
         currency: "PHP",
     });
-
-    async function clickHandler() {
-
-        const result = await fetch(`${apiKey}/carts/add-to-cart`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-            body: JSON.stringify({
-                productId: params.productId,
-                quantity: quantity,
-            }),
-        });
-
-        const data = result.json();
-
-        if (data) {
-            Swal.fire({
-                title: "Success!",
-                text: "You have successfully added the item to cart.",
-                icon: "success",
-            });
-        } else {
-            Swal.fire({
-                title: "Error!",
-                text: "Please try again.",
-                icon: "error",
-            });
-        }
-    }
 
     useEffect(() => {
         fetch(`${apiKey}/products/${params.productId}`)
@@ -75,13 +41,11 @@ export default function SingleProduct() {
                         />
                     </section>
                     <h3>{php.format(product.price)}</h3>
-                    <button
-                        onClick={() => clickHandler()}
-                        className={user.id === null ? "disabled" : ""}
-                        disabled={user.id === null}
-                    >
-                        Add to cart
-                    </button>
+                    <AddToCart
+                        apiKey={apiKey}
+                        productId={params.productId}
+                        quantity={quantity}
+                    />
                 </div>
             </article>
         </div>
