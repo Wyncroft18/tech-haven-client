@@ -1,8 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
+import { userContext } from "../App";
 import AddToCart from "../components/AddToCart";
 
 export default function SingleProduct() {
+    const { user, setUser } = useContext(userContext);
+
     const [product, setProduct] = useState([]);
     const [quantity, setQuantity] = useState(1);
 
@@ -41,11 +44,13 @@ export default function SingleProduct() {
                         />
                     </section>
                     <h3>{php.format(product.price)}</h3>
-                    <AddToCart
-                        apiKey={apiKey}
-                        productId={params.productId}
-                        quantity={quantity}
-                    />
+                    {!user.isAdmin && 
+                        <AddToCart
+                            apiKey={apiKey}
+                            productId={params.productId}
+                            quantity={quantity}
+                        />
+                    }
                 </div>
             </article>
         </div>
