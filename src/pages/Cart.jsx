@@ -1,7 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { userContext } from "../App";
 import Swal from "sweetalert2";
 
 export default function Cart() {
+    const { user, setUser } = useContext(userContext);
+
     const [cart, setCart] = useState([]);
 
     const apiKey = import.meta.env.VITE_API_BASE_URL;
@@ -22,31 +25,29 @@ export default function Cart() {
     });
 
     async function checkout() {
-
         const result = await fetch(`${apiKey}/orders/add-to-checkout`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                Authorization: `Bearer ${localStorage.getItem("token")}`
-            }
-        })
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+        });
 
-        const data = await result.json()
+        const data = await result.json();
 
         if (data) {
             Swal.fire({
                 title: "Success!",
                 text: "You have successfully placed your order.",
-                icon: "success"
-            })
+                icon: "success",
+            });
         } else {
             Swal.fire({
                 title: "Error!",
                 text: "Something went wrong placing your order.",
-                icon: "error"
-            })
+                icon: "error",
+            });
         }
-
     }
 
     useEffect(() => {
@@ -62,19 +63,20 @@ export default function Cart() {
     }, [cart]);
 
     return (
-        cartItemsElement.length > 0 
-        ?
-        <div className="cart-container">
-            <h1>Your cart</h1>
-            <section id="cart-items">{cartItemsElement}</section>
-            <section id="checkout">
-                <h3>Total Price: {phPeso.format(cart.totalPrice)}</h3>
-                <button onClick={() => checkout()}>Checkout</button>
-            </section>
-        </div>
-        :
-        <div className="cart-container">
-            <h1>You cart is empty</h1>
-        </div>
+        !user.isAdmin &&
+        (cartItemsElement.length > 0 ? (
+            <div className="cart-container">
+                <h1>Your cart</h1>
+                <section id="cart-items">{cartItemsElement}</section>
+                <section id="checkout">
+                    <h3>Total Price: {phPeso.format(cart.totalPrice)}</h3>
+                    <button onClick={() => checkout()}>Checkout</button>
+                </section>
+            </div>
+        ) : (
+            <div className="cart-container">
+                <h1>You cart is empty</h1>
+            </div>
+        ))
     );
 }
