@@ -1,15 +1,19 @@
 import { useEffect, useState } from "react"
 
 export default function Order() {
+    // states
     const [orders, setOrders] = useState([])
 
+    // api key
     const apiKey = import.meta.env.VITE_API_BASE_URL
 
+    // converts number to peso format
     const php = new Intl.NumberFormat("en-US", {
         style: "currency",
         currency: "PHP",
     });
 
+    // array of orders
     const orderElements = orders.map(order => {
         
         const productArr = order.productsOrdered.map(product => {
@@ -30,6 +34,7 @@ export default function Order() {
 
     })
 
+    // fetch user order or fetch all orders for admin*
     useEffect(() => {
         fetch(`${apiKey}/orders`, {
             headers: {
@@ -38,7 +43,6 @@ export default function Order() {
         })
         .then(res => res.json())
         .then(data => {
-            console.log(data.userOrders)
             setOrders(data.userOrders)
         })
     }, [])
