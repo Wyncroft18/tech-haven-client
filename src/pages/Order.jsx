@@ -18,27 +18,25 @@ export default function Order() {
     });
 
     // array of orders
-    const orderElements =
-        orders ||
-        [].map((order) => {
-            const productArr = order.productsOrdered.map((product) => {
-                return (
-                    <li key={product.productId}>
-                        {product.name} : Quantity {product.quantity}
-                    </li>
-                );
-            });
-
+    const orderElements = orders.map((order) => {
+        const productArr = order.productsOrdered.map((product) => {
             return (
-                <section key={order._id}>
-                    <h2>Order placed on: {order.orderedOn.slice(0, 10)}</h2>
-                    <h3>Product:</h3>
-                    <ul>{productArr}</ul>
-                    <h4>Status: {order.status}</h4>
-                    <h3>Total: {php.format(order.totalPrice)}</h3>
-                </section>
+                <li key={product.productId}>
+                    {product.name} : Quantity {product.quantity}
+                </li>
             );
         });
+
+        return (
+            <section key={order._id}>
+                <h2>Order placed on: {order.orderedOn.slice(0, 10)}</h2>
+                <h3>Product:</h3>
+                <ul>{productArr}</ul>
+                <h4>Status: {order.status}</h4>
+                <h3>Total: {php.format(order.totalPrice)}</h3>
+            </section>
+        );
+    });
 
     // effects
     useEffect(() => {
@@ -50,8 +48,11 @@ export default function Order() {
                 },
             });
             const data = await response.json();
-            console.log(data);
-            setOrders(data.orders);
+            if (data.message === "No orders found.") {
+                setOrders([]);
+            } else {
+                setOrders(data.orders);
+            }
         }
 
         // fetch orders for user
@@ -62,21 +63,10 @@ export default function Order() {
                 },
             });
             const data = await response.json();
-            console.log(data);
             setOrders(data.userOrders);
         }
 
         user.isAdmin ? fetchAllOrders() : fetchUserOrders();
-
-        // fetch(`${apiKey}/orders`, {
-        //     headers: {
-        //         Authorization: `Bearer ${localStorage.getItem("token")}`,
-        //     },
-        // })
-        //     .then((res) => res.json())
-        //     .then((data) => {
-        //         setOrders(data.userOrders);
-        //     });
     }, []);
 
     return orderElements.length > 0 ? (
