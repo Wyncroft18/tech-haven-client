@@ -3,17 +3,22 @@ import { userContext } from "../App";
 import Swal from "sweetalert2";
 
 export default function Cart() {
+    // user context
     const { user, setUser } = useContext(userContext);
 
+    // states
     const [cart, setCart] = useState([]);
 
+    // api key
     const apiKey = import.meta.env.VITE_API_BASE_URL;
 
+    // converts number to peso format
     const phPeso = new Intl.NumberFormat("en-US", {
         style: "currency",
         currency: "PHP",
     });
 
+    // cart array
     const cartItemsElement = (cart.cartItems || []).map((item) => {
         return (
             <div key={item._id} className="cart-item">
@@ -50,6 +55,7 @@ export default function Cart() {
         }
     }
 
+    // effects
     useEffect(() => {
         fetch(`${apiKey}/carts`, {
             headers: {
@@ -60,7 +66,7 @@ export default function Cart() {
             .then((data) => {
                 setCart(data);
             });
-    }, [cart]);
+    }, []);
 
     return (
         !user.isAdmin &&
