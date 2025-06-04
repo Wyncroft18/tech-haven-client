@@ -4,20 +4,26 @@ import { userContext } from "../App";
 import AddToCart from "../components/AddToCart";
 
 export default function SingleProduct() {
+    // user context
     const { user, setUser } = useContext(userContext);
 
+    // states
     const [product, setProduct] = useState([]);
     const [quantity, setQuantity] = useState(1);
 
+    // gets the product id from url
     const params = useParams();
 
+    // api key
     const apiKey = import.meta.env.VITE_API_BASE_URL;
 
+    // converts number to peso format
     const php = new Intl.NumberFormat("en-US", {
         style: "currency",
         currency: "PHP",
     });
 
+    // effects
     useEffect(() => {
         fetch(`${apiKey}/products/${params.productId}`)
             .then((res) => res.json())
@@ -44,13 +50,13 @@ export default function SingleProduct() {
                         />
                     </section>
                     <h3>{php.format(product.price)}</h3>
-                    {!user.isAdmin && 
+                    {!user.isAdmin && (
                         <AddToCart
                             apiKey={apiKey}
                             productId={params.productId}
                             quantity={quantity}
                         />
-                    }
+                    )}
                 </div>
             </article>
         </div>
