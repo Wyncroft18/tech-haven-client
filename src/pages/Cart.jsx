@@ -29,8 +29,9 @@ export default function Cart() {
         );
     });
 
+    // functions
     async function checkout() {
-        const result = await fetch(`${apiKey}/orders/add-to-checkout`, {
+        const response = await fetch(`${apiKey}/orders/add-to-checkout`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -38,7 +39,9 @@ export default function Cart() {
             },
         });
 
-        const data = await result.json();
+        const data = await response.json();
+
+        getCart();
 
         if (data) {
             Swal.fire({
@@ -55,17 +58,21 @@ export default function Cart() {
         }
     }
 
-    // effects
-    useEffect(() => {
-        fetch(`${apiKey}/carts`, {
+    async function getCart() {
+        const response = await fetch(`${apiKey}/carts`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                setCart(data);
-            });
+        });
+
+        const data = await response.json();
+
+        setCart(data);
+    }
+
+    // effects
+    useEffect(() => {
+        getCart();
     }, []);
 
     return (
